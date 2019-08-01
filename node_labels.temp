@@ -1,0 +1,1 @@
+node_labels{role="coordinator",app="saas",hostname="saas-db-coordinator-1",fqdn="saas-db-coordinator-1.darkcubed.test",nodename="ip-172-20-98-41",instance="172.20.98.41",cluster="saas-1"} 1
