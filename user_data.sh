@@ -105,6 +105,8 @@ pg_conftool ${version} ${cluster} set shared_buffers 4GB
 pg_conftool ${version} ${cluster} set random_page_cost 2
 pg_conftool ${version} ${cluster} set maintenance_work_mem 1GB
 pg_conftool ${version} ${cluster} set effective_cache_size 40GB
+pg_conftool ${version} ${cluster} set pg_partman_bgw.dbname dark3
+pg_conftool ${version} ${cluster} set pg_partman_bgw.analyze off
 
 mv ${hba} ${hba}.bak
 cat <<EOF > ${hba}
