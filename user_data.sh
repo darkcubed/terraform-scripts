@@ -64,8 +64,8 @@ echo 'zfs mount -a' > /etc/rc.local
 sleep 5
 mkdir /pg
 
-#zpool create -o ashift=12 -O atime=off -O compression=lz4 -O dedup=off -O exec=off -O logbias=throughput -O primarycache=metadata -O recordsize=128K -O reservation=1G -O relatime=on -O sync=standard -m none rpool mirror /dev/disk/by-partuuid/${part[1]} /dev/disk/by-partuuid/${part[6]} mirror /dev/disk/by-partuuid/${part[2]} /dev/disk/by-partuuid/${part[7]} mirror /dev/disk/by-partuuid/${part[3]} /dev/disk/by-partuuid/${part[8]} mirror /dev/disk/by-partuuid/${part[4]} /dev/disk/by-partuuid/${part[9]} mirror /dev/disk/by-partuuid/${part[5]} /dev/disk/by-partuuid/${part[10]}
-zpool create -o ashift=12 -O atime=off -O compression=lz4 -O dedup=off -O exec=off -O logbias=throughput -O primarycache=metadata -O recordsize=128K -O reservation=1G -O relatime=on -O sync=standard -m none rpool /dev/disk/by-partuuid/${part[1]} /dev/disk/by-partuuid/${part[2]} /dev/disk/by-partuuid/${part[3]} /dev/disk/by-partuuid/${part[4]} /dev/disk/by-partuuid/${part[5]}
+zpool create -o ashift=12 -O atime=off -O compression=lz4 -O dedup=off -O exec=off -O logbias=throughput -O primarycache=metadata -O recordsize=128K -O reservation=1G -O relatime=on -O sync=standard -m none rpool mirror /dev/disk/by-partuuid/${part[1]} /dev/disk/by-partuuid/${part[6]} mirror /dev/disk/by-partuuid/${part[2]} /dev/disk/by-partuuid/${part[7]} mirror /dev/disk/by-partuuid/${part[3]} /dev/disk/by-partuuid/${part[8]} mirror /dev/disk/by-partuuid/${part[4]} /dev/disk/by-partuuid/${part[9]} mirror /dev/disk/by-partuuid/${part[5]} /dev/disk/by-partuuid/${part[10]}
+#zpool create -o ashift=12 -O atime=off -O compression=lz4 -O dedup=off -O exec=off -O logbias=throughput -O primarycache=metadata -O recordsize=128K -O reservation=1G -O relatime=on -O sync=standard -m none rpool /dev/disk/by-partuuid/${part[1]} /dev/disk/by-partuuid/${part[2]} /dev/disk/by-partuuid/${part[3]} /dev/disk/by-partuuid/${part[4]} /dev/disk/by-partuuid/${part[5]}
 zpool status
 zpool_size=0
 for msize in $(zdb | grep asize | awk '{ print $2 }'); do (( zpool_size += msize )); done
