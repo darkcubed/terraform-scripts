@@ -97,6 +97,7 @@ else
    networks=$test_networks
 fi
 hba=/etc/postgresql/${version}/${cluster}/pg_hba.conf
+pgconf=/etc/postgresql/${version}/${cluster}/postgresql.conf
 pg_conftool ${version} ${cluster} set shared_preload_libraries citus
 pg_conftool ${version} ${cluster} set listen_addresses '*'
 pg_conftool ${version} ${cluster} set full_page_writes off
@@ -107,10 +108,11 @@ pg_conftool ${version} ${cluster} set maintenance_work_mem 1GB
 pg_conftool ${version} ${cluster} set effective_cache_size 40GB
 pg_conftool ${version} ${cluster} set pg_partman_bgw.dbname dark3
 pg_conftool ${version} ${cluster} set pg_partman_bgw.analyze off
-pg_conftool ${version} ${cluster} set citus.cluster_name saas
+#pg_conftool ${version} ${cluster} set citus.cluster_name saas
 pg_conftool ${version} ${cluster} set citus.shard_count 96
 pg_conftool ${version} ${cluster} set citus.shard_replication_factor 2
-pg_conftool ${version} ${cluster} set citus.max_intermediate_result_size -1
+pg_conftool ${version} ${cluster} set citus.max_intermediate_result_size 1
+sed -i 's/citus.max_intermediate_result_size 1/citus.max_intermediate_result_size -1/g' ${pgconf}
 
 mv ${hba} ${hba}.bak
 cat <<EOF > ${hba}
