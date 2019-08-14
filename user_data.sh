@@ -107,6 +107,10 @@ pg_conftool ${version} ${cluster} set maintenance_work_mem 1GB
 pg_conftool ${version} ${cluster} set effective_cache_size 40GB
 pg_conftool ${version} ${cluster} set pg_partman_bgw.dbname dark3
 pg_conftool ${version} ${cluster} set pg_partman_bgw.analyze off
+pg_conftool ${version} ${cluster} set citus.cluster_name saas
+pg_conftool ${version} ${cluster} set citus.shard_count 96
+pg_conftool ${version} ${cluster} set citus.shard_replication_factor 2
+pg_conftool ${version} ${cluster} set citus.max_intermediate_result_size -1
 
 mv ${hba} ${hba}.bak
 cat <<EOF > ${hba}
@@ -135,7 +139,7 @@ EOF
 echo '# Local network connections:' >> ${hba}
 for net in ${networks}; do echo $'host\tall\t\tall\t\t'${net}$'\t\ttrust' >> ${hba}; done
 chown postgres. ${hba} && chmod 640 ${hba}
-systemctl enable postgresql && systemctl restart postgresql
+systemctl enable postgresql && systemctl restart postgresql && systemctl status postgresql
 
 # Configure prometheus exporters
 cat <<EOF > /etc/default/prometheus-node-exporter
