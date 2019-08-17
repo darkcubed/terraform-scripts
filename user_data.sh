@@ -112,7 +112,7 @@ pg_conftool ${version} ${cluster} set pg_partman_bgw.analyze off
 pg_conftool ${version} ${cluster} set citus.shard_count 96
 pg_conftool ${version} ${cluster} set citus.shard_replication_factor 2
 pg_conftool ${version} ${cluster} set citus.max_intermediate_result_size 1
-sed -i 's/citus.max_intermediate_result_size 1/citus.max_intermediate_result_size -1/g' ${pgconf}
+sed -i 's/citus.max_intermediate_result_size = 1/citus.max_intermediate_result_size = -1/g' ${pgconf}
 
 mv ${hba} ${hba}.bak
 cat <<EOF > ${hba}
